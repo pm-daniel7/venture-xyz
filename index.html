@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentureXYZ | Innovation Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#08090A',        // Linear-like dark background
+                            surface: '#121417',   // Slightly lighter surface
+                            border: 'rgba(255,255,255,0.08)', // Subtle borders
+                            primary: '#5E6AD2',   // Linear-ish Blurple
+                            accent: '#F2C94C',    // Amber accent
+                            text: '#E8E8E8',
+                            muted: '#8A8F98',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'glow-gradient': 'radial-gradient(circle at 50% 0%, rgba(94, 106, 210, 0.15) 0%, transparent 50%)',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Imported Plus Jakarta Sans for Headings and Inter for Body */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #08090A;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Custom Scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08090A; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+
+        /* Subtle grid background */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text antialiased selection:bg-brand-primary/30">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#08090A]/80 backdrop-blur-xl border-b border-brand-border transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- Logo Image -->
+                <img src="VXYZ Logo.PNG" 
+                     alt="VentureXYZ Logo" 
+                     class="h-8 w-auto object-contain transition-transform group-hover:scale-105">
+                <span class="font-display font-bold text-lg tracking-tight text-white group-hover:text-brand-text transition-colors">VentureXYZ</span>
+            </a>
+            
+            <!-- Grouped Navigation & Actions (Right Aligned) -->
+            <div class="hidden md:flex items-center gap-2">
+                <!-- Nav Links: Ghost Button Style -->
+                <div class="flex items-center gap-1">
+                    <a href="#services" class="px-4 py-2 text-sm font-medium text-brand-muted hover:text-white hover:bg-white/5 rounded-full transition-all duration-200">Services</a>
+                    <a href="#mission" class="px-4 py-2 text-sm font-medium text-brand-muted hover:text-white hover:bg-white/5 rounded-full transition-all duration-200">Mission</a>
+                    <a href="#approach" class="px-4 py-2 text-sm font-medium text-brand-muted hover:text-white hover:bg-white/5 rounded-full transition-all duration-200">Framework</a>
+                </div>
+
+                <!-- Subtle Vertical Divider -->
+                <div class="h-4 w-px bg-white/10 mx-2"></div>
+
+                <!-- Contact Button -->
+                <a href="#contact" class="text-sm font-medium bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full transition-all border border-white/5 hover:border-white/10 shadow-sm">
+                    Contact
+                </a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" class="text-brand-muted hover:text-white">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-surface border-b border-brand-border">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#services" class="block text-sm text-brand-muted hover:text-white">Services</a>
+                <a href="#mission" class="block text-sm text-brand-muted hover:text-white">Mission</a>
+                <a href="#approach" class="block text-sm text-brand-muted hover:text-white">Framework</a>
+                <a href="#contact" class="block text-sm text-brand-primary">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Glow Effect behind Hero -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-glow-gradient pointer-events-none"></div>
+        <div class="absolute inset-0 bg-grid pointer-events-none"></div>
+
+        <!-- NEW: Innovation Particle Canvas Background -->
+        <canvas id="innovation-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-30 mix-blend-screen z-0"></canvas>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            
+            <h1 class="font-display text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 mb-6 animate-fade-in" style="animation-delay: 0.1s;">
+                Bridging Talent <br /> and Execution.
+            </h1>
+            
+            <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-brand-muted leading-relaxed animate-fade-in" style="animation-delay: 0.2s;">
+                VentureXYZ is an <span class="text-brand-primary font-medium">innovation engine for the African tech ecosystem</span>. We address the "Paradox of Potential" by building startups and manufacturing great experience.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.3s;">
+                <a href="#services" class="px-6 py-3 bg-brand-text text-brand-bg font-medium rounded-full hover:bg-white transition-colors font-display">
+                    Explore Our Work
+                </a>
+                <a href="#contact" class="px-6 py-3 bg-transparent border border-brand-border text-brand-text font-medium rounded-full hover:bg-white/5 transition-colors font-display">
+                    Get in Touch <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Bento Grid Section -->
+    <section id="services" class="py-24 border-t border-brand-border relative">
+        <div class="max-w-6xl mx-auto px-6 reveal-on-scroll">
+            <div class="mb-16">
+                <h2 class="font-display text-3xl font-bold tracking-tight text-white mb-4">Two Pillars of Innovation</h2>
+                <p class="text-brand-muted max-w-xl text-lg">We operate at the intersection of venture building and talent development.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1: Advisory -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/[0.04] transition-all group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-30 transition-opacity">
+                        <i class="fas fa-compass text-6xl text-brand-primary"></i>
+                    </div>
+                    <div class="h-10 w-10 bg-brand-primary/20 rounded-lg flex items-center justify-center mb-6 text-brand-primary">
+                        <span class="font-mono font-bold">01</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-3">Product Advisory</h3>
+                    <p class="text-brand-muted mb-6 leading-relaxed">
+                        Partnering with early-stage startups to navigate the journey from idea to scale. We focus on true Product-Market Fit and strategic architecture.
+                    </p>
+                    <div class="border-t border-brand-border pt-6 grid grid-cols-1 gap-3">
+                        <div class="flex items-center text-sm text-brand-muted">
+                            <i class="fas fa-check-circle text-brand-primary mr-3"></i> Strategy & Roadmap
+                        </div>
+                        <div class="flex items-center text-sm text-brand-muted">
+                            <i class="fas fa-check-circle text-brand-primary mr-3"></i> Unit Economics
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Residency -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/[0.04] transition-all group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-30 transition-opacity">
+                        <i class="fas fa-users-gear text-6xl text-brand-accent"></i>
+                    </div>
+                    <div class="h-10 w-10 bg-brand-accent/20 rounded-lg flex items-center justify-center mb-6 text-brand-accent">
+                        <span class="font-mono font-bold">02</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-3">"Build a Startup!" Residency</h3>
+                    <p class="text-brand-muted mb-6 leading-relaxed">
+                        A high-intensity simulation where residents launch real products. We turn idle time into high-impact professional experience.
+                    </p>
+                    <div class="border-t border-brand-border pt-6 grid grid-cols-1 gap-3">
+                        <div class="flex items-center text-sm text-brand-muted">
+                            <i class="fas fa-check-circle text-brand-accent mr-3"></i> Real Venture Building
+                        </div>
+                        <div class="flex items-center text-sm text-brand-muted">
+                            <i class="fas fa-check-circle text-brand-accent mr-3"></i> Execution Portfolio
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem / Mission Section -->
+    <section id="mission" class="py-24 border-t border-brand-border bg-brand-surface/30">
+        <div class="max-w-6xl mx-auto px-6 reveal-on-scroll">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <!-- Left: Typography -->
+                <div>
+                    <h2 class="text-sm font-mono text-brand-primary mb-4 uppercase tracking-wider">The Insight</h2>
+                    <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+                        The Entry-Level Career Cliff
+                    </h3>
+                    <p class="text-brand-muted text-lg mb-8 leading-relaxed">
+                        A generation of brilliant youth remains unemployed not because of talent, but because of a <span class="text-white font-medium">broken rung</span> in the career ladder.
+                    </p>
+                    
+                    <div class="space-y-8">
+                        <div class="pl-4 border-l-2 border-brand-border hover:border-brand-primary transition-colors">
+                            <h4 class="font-display text-white font-semibold mb-1">Automation of Basics</h4>
+                            <p class="text-brand-muted text-sm">AI is automating the entry-level tasks that used to serve as training grounds.</p>
+                        </div>
+                        <div class="pl-4 border-l-2 border-brand-border hover:border-brand-primary transition-colors">
+                            <h4 class="font-display text-white font-semibold mb-1">The Experience Paradox</h4>
+                            <p class="text-brand-muted text-sm">You can't get a job without experience, and you can't get experience without a job.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Visual Representation -->
+                <div class="relative">
+                    <!-- Abstract Graphic -->
+                    <div class="glass-card rounded-xl p-8 border border-brand-border bg-gradient-to-br from-brand-bg to-brand-surface">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="text-sm text-brand-muted font-medium">Risk Profile</div>
+                            <div class="text-xs px-2 py-1 rounded bg-green-500/20 text-green-400 font-medium">Optimized</div>
+                        </div>
+                        
+                        <!-- Timeline Graphic -->
+                        <div class="relative h-48 border-l border-dashed border-brand-border ml-4 my-4">
+                            <!-- Node 1 -->
+                            <div class="absolute -left-1.5 top-0 h-3 w-3 rounded-full bg-brand-muted"></div>
+                            <div class="ml-6 top-0 absolute">
+                                <div class="text-white text-sm font-semibold">Residency Begins</div>
+                                <div class="text-brand-muted text-xs">Teams formed</div>
+                            </div>
+
+                            <!-- Node 2 -->
+                            <div class="absolute -left-1.5 top-1/2 h-3 w-3 rounded-full bg-brand-primary shadow-[0_0_10px_rgba(94,106,210,0.5)]"></div>
+                            <div class="ml-6 top-1/2 -mt-3 absolute">
+                                <div class="text-white text-sm font-semibold">Product Launch</div>
+                                <div class="text-brand-muted text-xs">Validation</div>
+                            </div>
+
+                            <!-- Node 3 -->
+                            <div class="absolute -left-1.5 bottom-0 h-3 w-3 rounded-full bg-brand-accent"></div>
+                            <div class="ml-6 bottom-0 absolute">
+                                <div class="text-white text-sm font-semibold">Outcome</div>
+                                <div class="text-brand-muted text-xs">Employment or Funding</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework / Stats -->
+    <section id="approach" class="py-24 border-t border-brand-border">
+        <div class="max-w-6xl mx-auto px-6 reveal-on-scroll">
+            <h2 class="font-display text-3xl font-bold tracking-tight text-white mb-12 text-center">Strategic Framework</h2>
+            
+            <div class="grid md:grid-cols-3 gap-px bg-brand-border border border-brand-border rounded-xl overflow-hidden">
+                <div class="bg-brand-bg p-8 hover:bg-brand-surface transition-colors">
+                    <div class="text-brand-muted text-xs font-mono mb-4">01. CURRICULUM</div>
+                    <h3 class="font-display text-lg font-bold text-white mb-2">Three Pillars</h3>
+                    <p class="text-brand-muted text-sm">Rigorous structure focused on Discovery, Product-Market Fit, and Metrics.</p>
+                </div>
+                <div class="bg-brand-bg p-8 hover:bg-brand-surface transition-colors">
+                    <div class="text-brand-muted text-xs font-mono mb-4">02. MODEL</div>
+                    <h3 class="font-display text-lg font-bold text-white mb-2">Patient Capital</h3>
+                    <p class="text-brand-muted text-sm">Sustainability via long-term equity stakes and mid-term placement fees.</p>
+                </div>
+                <div class="bg-brand-bg p-8 hover:bg-brand-surface transition-colors">
+                    <div class="text-brand-muted text-xs font-mono mb-4">03. STATUS</div>
+                    <h3 class="font-display text-lg font-bold text-white mb-2">Implementation</h3>
+                    <p class="text-brand-muted text-sm">Conceptual infrastructure complete. Pilot launching with 2-3 teams.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 border-t border-brand-border bg-[#050607]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <h2 class="font-display text-2xl font-bold text-white tracking-tight mb-2">Build with VentureXYZ</h2>
+                    <p class="text-brand-muted">Turning potential into professional power.</p>
+                </div>
+                
+                <!-- Action Buttons Container -->
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <!-- LinkedIn Button (Secondary) -->
+                    <a href="https://www.linkedin.com/company/vxyz/" target="_blank" class="group px-6 py-2.5 rounded-full border border-brand-border hover:border-brand-primary/50 hover:bg-brand-primary/10 transition-all duration-300 flex items-center gap-2">
+                        <i class="fab fa-linkedin text-brand-muted group-hover:text-brand-primary transition-colors text-lg"></i>
+                        <span class="text-sm font-medium text-brand-muted group-hover:text-white transition-colors">LinkedIn</span>
+                    </a>
+
+                    <!-- Contact Button (Primary) -->
+                    <a href="mailto:build.venturexyz@gmail.com" class="px-6 py-2.5 bg-white text-black text-sm font-medium rounded-full hover:bg-gray-200 transition-colors font-display shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                        build.venturexyz@gmail.com
+                    </a>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-brand-border text-center md:text-left text-xs text-brand-muted">
+                <p>&copy; 2026 VentureXYZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // --- Particle Network Animation (Innovation Engine) ---
+        const canvas = document.getElementById('innovation-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // Animation Config
+        const particleCount = 60; // How many dots
+        const connectionDistance = 150; // How far before they connect
+        const speed = 0.3; // Speed of movement
+
+        function resize() {
+            width = canvas.width = canvas.offsetWidth;
+            height = canvas.height = canvas.offsetHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * speed;
+                this.vy = (Math.random() - 0.5) * speed;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(94, 106, 210, 0.4)'; // Brand primary color
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connections
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(94, 106, 210, ${0.15 * (1 - distance / connectionDistance)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            resize();
+            initParticles();
+        });
+
+        // Start Animation
+        resize();
+        initParticles();
+        animateParticles();
+
+        // --- Scroll Reveal Animation ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Only animate once per session
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((element) => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
