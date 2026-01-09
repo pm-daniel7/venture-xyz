@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="VXYZ favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VentureXYZ | Innovation Engine</title>
+    <link rel="shortcut icon" type="image/x-icon" href="VXYZFavicon.ico">
+    
+    <!-- SOCIAL MEDIA PREVIEW TAGS (OPEN GRAPH) -->
+    <meta property="og:title" content="VentureXYZ | Innovation Engine">
+    <meta property="og:description" content="Bridging talent and execution in the African tech ecosystem. We build startups and manufacture great experience.">
+    
+    <!-- Updated for custom domain & using Logo as banner -->
+    <meta property="og:image" content="https://www.venturexyz.io/VXYZLogo.png">
+    <meta property="og:url" content="https://www.venturexyz.io/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VentureXYZ | Innovation Engine">
+    <meta name="twitter:description" content="Bridging talent and execution in the African tech ecosystem.">
+    <meta name="twitter:image" content="https://www.venturexyz.io/VXYZLogo.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fontshare API for Satoshi (Body) and General Sans (Headings) -->
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
@@ -23,8 +43,8 @@
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['Satoshi', 'sans-serif'], 
+                        display: ['"General Sans"', 'sans-serif'], // Switched to General Sans
                     },
                     backgroundImage: {
                         'glow-gradient': 'radial-gradient(circle at 50% 0%, rgba(94, 106, 210, 0.15) 0%, transparent 50%)',
@@ -43,16 +63,14 @@
         }
     </script>
     <style>
-        /* Imported Plus Jakarta Sans for Headings and Inter for Body */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-        
         body { 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Satoshi', sans-serif; 
             background-color: #08090A;
         }
 
+        /* General Sans for all Headings and Display text */
         h1, h2, h3, h4, .font-display {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'General Sans', sans-serif;
         }
 
         /* Custom Scrollbar for dark theme */
@@ -105,10 +123,9 @@
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
                 <!-- Logo Image -->
-                <img src="VXYZ Logo.PNG" 
+                <img src="VXYZLogo.png" 
                      alt="VentureXYZ Logo" 
                      class="h-8 w-auto object-contain transition-transform group-hover:scale-105">
-                <span class="font-display font-bold text-lg tracking-tight text-white group-hover:text-brand-text transition-colors">VentureXYZ</span>
             </a>
             
             <!-- Grouped Navigation & Actions (Right Aligned) -->
@@ -245,7 +262,6 @@
         </div>
     </section>
 
-    <!-- NEW: VENTURE LAB (AI TOOLS SECTION) -->
     <!-- Problem / Mission Section (Residency Only) -->
     <section id="mission" class="py-24 bg-brand-surface/30">
         <div class="max-w-6xl mx-auto px-6 reveal-on-scroll">
@@ -487,4 +503,3 @@
     </script>
 </body>
 </html>
-
