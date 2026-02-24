@@ -3,508 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VentureXYZ | Innovation Engine</title>
-    <meta name="description" content="Bridging talent and execution in the African tech ecosystem. We build startups and manufacture great experience.">
-    <link rel="shortcut icon" type="image/x-icon" href="VXYZFavicon.ico">
+    <title>VentureXYZ | System Evolving</title>
+    <meta name="description" content="We are dismantling the old architecture. The next iteration of VentureXYZ is currently compiling.">
     
+    <!-- Favicon (Inline SVG for instant loading) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23030305%22/><path d=%22M30 35 L50 25 L70 35 L50 45 Z M30 50 L50 40 L70 50 L50 60 Z M30 65 L50 55 L70 65 L50 75 Z%22 fill=%22%235E6AD2%22/></svg>">
+
+    <!-- Social Preview / Open Graph -->
+    <meta property="og:title" content="VentureXYZ | System Evolving">
+    <meta property="og:description" content="We are dismantling the old architecture. The next iteration of VentureXYZ is currently compiling.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://venturexyz.io/">
+    <!-- Placeholder image for preview - update with actual URL when hosted -->
+    <meta property="og:image" content="https://venturexyz.io/og-preview.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VentureXYZ | System Evolving">
+    <meta name="twitter:description" content="The next iteration of the Venture Studio is currently compiling.">
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://venturexyz.io/">
     
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://venturexyz.io/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="VentureXYZ | Innovation Engine">
-    <meta property="og:description" content="Bridging talent and execution in the African tech ecosystem. We build startups and manufacture great experience.">
-    <meta property="og:image" content="https://venturexyz.io/VXYZLogo.png">
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="venturexyz.io">
-    <meta property="twitter:url" content="https://venturexyz.io/">
-    <meta name="twitter:title" content="VentureXYZ | Innovation Engine">
-    <meta name="twitter:description" content="Bridging talent and execution in the African tech ecosystem. We build startups and manufacture great experience.">
-    <meta name="twitter:image" content="https://venturexyz.io/VXYZLogo.png">
-
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Fontshare API for Satoshi (Body) and General Sans (Headings) -->
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Fontshare API for Satoshi and General Sans -->
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@400,500,600,700,900&display=swap" rel="stylesheet">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            bg: '#08090A',        // Linear-like dark background
-                            surface: '#121417',   // Slightly lighter surface
-                            border: 'rgba(255,255,255,0.08)', // Subtle borders
-                            primary: '#5E6AD2',   // Linear-ish Blurple
-                            accent: '#F2C94C',    // Amber accent
-                            text: '#E8E8E8',
-                            muted: '#8A8F98',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Satoshi', 'sans-serif'], 
-                        display: ['"General Sans"', 'sans-serif'], // Switched to General Sans
-                    },
-                    backgroundImage: {
-                        'glow-gradient': 'radial-gradient(circle at 50% 0%, rgba(94, 106, 210, 0.15) 0%, transparent 50%)',
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.8s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
+        (function() {
+            const config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            brand: {
+                                bg: '#030305',
+                                surface: '#0A0A0F',   
+                                primary: '#5E6AD2',
+                                accent: '#F2C94C',
+                                neon: '#FF2A6D',
+                                cyan: '#05D9E8',
+                            }
+                        },
+                        fontFamily: {
+                            sans: ['Satoshi', 'sans-serif'], 
+                            display: ['"General Sans"', 'sans-serif'],
+                            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+                        },
+                        animation: {
+                            'fade-in': 'fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                            'scanline': 'scanline 8s linear infinite',
+                            'shimmer': 'shimmer 2s infinite linear',
+                        },
+                        keyframes: {
+                            fadeIn: {
+                                '0%': { opacity: '0', transform: 'translateY(30px)', filter: 'blur(10px)' },
+                                '100%': { opacity: '1', transform: 'translateY(0)', filter: 'blur(0px)' },
+                            },
+                            scanline: {
+                                '0%': { transform: 'translateY(-100%)' },
+                                '100%': { transform: 'translateY(100vh)' }
+                            },
+                            shimmer: {
+                                '0%': { backgroundPosition: '-200% center' },
+                                '100%': { backgroundPosition: '200% center' }
+                            }
                         }
                     }
                 }
+            };
+
+            if (window.tailwind) {
+                window.tailwind.config = config;
+            } else {
+                Object.defineProperty(window, 'tailwind', {
+                    configurable: true,
+                    enumerable: true,
+                    get: function() { return this._tailwind; },
+                    set: function(val) {
+                        this._tailwind = val;
+                        if (val && val.config === undefined) {
+                            val.config = config;
+                        }
+                    }
+                });
             }
-        }
+        })();
     </script>
     <style>
         body { 
             font-family: 'Satoshi', sans-serif; 
-            background-color: #08090A;
+            background-color: #030305;
+            overflow-x: hidden;
+            overflow-y: auto;
+            color: #E8E8E8;
+            margin: 0;
         }
-
-        /* General Sans for all Headings and Display text */
-        h1, h2, h3, h4, .font-display {
-            font-family: 'General Sans', sans-serif;
+        h1, h2, .font-display { font-family: 'General Sans', sans-serif; }
+        #webgl-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
         }
-
-        /* Custom Scrollbar for dark theme */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .ui-layer { position: relative; z-index: 10; display: block; }
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.4;
         }
-        ::-webkit-scrollbar-track {
-            background: #08090A; 
+        .glitch-text { position: relative; display: inline-block; }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #333; 
-            border-radius: 4px;
+        .glitch-text::before {
+            left: 2px; text-shadow: -2px 0 #FF2A6D;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555; 
+        .glitch-text::after {
+            left: -2px; text-shadow: -2px 0 #05D9E8;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
         }
-
-        /* Subtle grid background */
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        @keyframes glitch-anim { 0% { clip: rect(12px, 9999px, 85px, 0); } 100% { clip: rect(67px, 9999px, 23px, 0); } }
+        @keyframes glitch-anim2 { 0% { clip: rect(65px, 9999px, 100px, 0); } 100% { clip: rect(38px, 9999px, 49px, 0); } }
+        #morph-text {
+            display: inline-block;
+            min-width: 250px;
+            border-right: 4px solid #F2C94C;
+            padding-right: 8px;
+            animation: blink 0.75s step-end infinite;
         }
-        
-        .glass-card {
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: #F2C94C; } }
+        .hl-line {
+            display: inline;
+            position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:%235E6AD2;stop-opacity:0.8' /%3E%3Cstop offset='100%25' style='stop-color:%2305D9E8;stop-opacity:0.8' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M-5,12 C25,5 75,18 105,10 L105,90 C75,82 25,95 -5,88 Z' fill='url(%23g)'/%3E%3Cpath d='M-2,15 Q50,8 102,15' stroke='white' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3C/svg%3E");
+            background-size: 0% 100%;
+            background-repeat: no-repeat;
+            background-position: left center;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+            padding: 4px 8px;
+            border-radius: 2px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            animation: markerSwipe 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            animation-delay: var(--delay);
+        }
+        .hl-neon {
+            background-image: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:%23BAE6FD;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23818CF8;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M-5,10 Q50,20 105,8 L105,92 Q50,80 -5,90 Z' fill='url(%23g2)'/%3E%3Cpath d='M0,85 Q50,75 100,85' stroke='black' stroke-width='1' fill='none' opacity='0.2'/%3E%3C/svg%3E");
+            color: #030305;
+            text-shadow: none;
+            font-weight: 800;
+            box-shadow: 0 0 25px rgba(125, 211, 252, 0.4);
+        }
+        @keyframes markerSwipe { 0% { background-size: 0% 100%; } 100% { background-size: 100% 100%; } }
+        .btn-creative {
             background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
         }
-
-        /* Scroll Reveal Animation Classes */
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        .btn-creative::before {
+            content: '';
+            position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
         }
-        
-        .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        .btn-creative:hover::before { left: 100%; }
+        .btn-creative:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
         }
     </style>
 </head>
-<body class="bg-brand-bg text-brand-text antialiased selection:bg-brand-primary/30">
+<body class="selection:bg-brand-neon/40 selection:text-white">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-[#08090A]/80 backdrop-blur-xl border-b border-brand-border transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <!-- Logo Image -->
-                <img src="VXYZLogo.png" 
-                     alt="VentureXYZ Logo" 
-                     class="h-14 w-auto object-contain transition-transform group-hover:scale-105">
-            </a>
-            
-            <!-- Grouped Navigation & Actions (Right Aligned) -->
-            <div class="hidden md:flex items-center gap-2">
-                <!-- Nav Links: Ghost Button Style -->
-                <div class="flex items-center gap-1">
-                    <a href="#services" class="px-4 py-2 text-sm font-medium text-brand-muted hover:text-white hover:bg-white/5 rounded-full transition-all duration-200">Services</a>
-                    <a href="#mission" class="px-4 py-2 text-sm font-medium text-brand-muted hover:text-white hover:bg-white/5 rounded-full transition-all duration-200">Mission</a>
-                    <a href="#approach" class="px-4 py-2 text-sm font-medium text-brand-muted hover:text-white hover:bg-white/5 rounded-full transition-all duration-200">Framework</a>
-                </div>
+    <canvas id="webgl-canvas"></canvas>
+    <div class="scanlines"></div>
 
-                <!-- Subtle Vertical Divider -->
-                <div class="h-4 w-px bg-white/10 mx-2"></div>
-
-                <!-- Contact Button -->
-                <a href="#contact" class="text-sm font-medium bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full transition-all border border-white/5 hover:border-white/10 shadow-sm">
-                    Contact
-                </a>
-            </div>
-
-            <!-- Mobile menu button -->
-            <div class="md:hidden flex items-center">
-                <button id="mobile-menu-btn" class="text-brand-muted hover:text-white">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-surface border-b border-brand-border">
-            <div class="px-4 py-4 space-y-3">
-                <a href="#services" class="block text-sm text-brand-muted hover:text-white">Services</a>
-                <a href="#mission" class="block text-sm text-brand-muted hover:text-white">Mission</a>
-                <a href="#approach" class="block text-sm text-brand-muted hover:text-white">Framework</a>
-                <a href="#contact" class="block text-sm text-brand-primary">Contact Us</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- Glow Effect behind Hero -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-glow-gradient pointer-events-none"></div>
-        <div class="absolute inset-0 bg-grid pointer-events-none"></div>
-
-        <!-- NEW: Innovation Particle Canvas Background -->
-        <canvas id="innovation-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-30 mix-blend-screen z-0"></canvas>
-
-        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
-            
-            <h1 class="font-display text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 mb-6 animate-fade-in" style="animation-delay: 0.1s;">
-                Bridging Talent <br /> and Execution.
-            </h1>
-            
-            <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-brand-muted leading-relaxed animate-fade-in" style="animation-delay: 0.2s;">
-                VentureXYZ is an <span class="text-brand-primary font-medium">innovation engine</span> for the African tech ecosystem. We address the "Paradox of Potential" by building startups and manufacturing great experience.
-            </p>
-
-            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.3s;">
-                <a href="#services" class="px-6 py-3 bg-brand-text text-brand-bg font-medium rounded-full hover:bg-white transition-colors font-display">
-                    Explore Our Work
-                </a>
-                <a href="#contact" class="px-6 py-3 bg-transparent border border-brand-border text-brand-text font-medium rounded-full hover:bg-white/5 transition-colors font-display">
-                    Get in Touch <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services / Bento Grid Section -->
-    <section id="services" class="py-24 border-t border-brand-border relative">
-        <div class="max-w-6xl mx-auto px-6 reveal-on-scroll">
-            <div class="mb-16">
-                <h2 class="font-display text-3xl font-bold tracking-tight text-white mb-4">Two Pillars of Innovation</h2>
-                <p class="text-brand-muted max-w-xl text-lg">We serve the ecosystem through two distinct tracks: external advisory and internal venture building.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Track 1: Advisory (External) -->
-                <div class="glass-card rounded-2xl p-8 hover:bg-white/[0.04] transition-all group relative overflow-hidden flex flex-col h-full">
-                    <div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-30 transition-opacity">
-                        <i class="fas fa-compass text-6xl text-brand-primary"></i>
+    <div class="ui-layer">
+        
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col">
+            <header class="w-full max-w-7xl mx-auto p-6 md:p-12 flex justify-between items-center opacity-0 animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded bg-black/50 border border-white/10 flex items-center justify-center backdrop-blur-md relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-primary/50 to-brand-neon/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <i class="fa-solid fa-layer-group text-white text-lg relative z-10 group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <div class="mb-auto">
-                        <div class="h-10 px-3 bg-brand-primary/20 rounded-lg inline-flex items-center justify-center mb-6 text-brand-primary text-xs font-bold uppercase tracking-wider">
-                            For Startups
-                        </div>
-                        <h3 class="font-display text-2xl font-bold text-white mb-3">Product Advisory</h3>
-                        <p class="text-brand-muted mb-6 leading-relaxed">
-                            We partner with external startups to navigate the critical journey from idea to scale. This is a pure consulting engagement focused on achieving true Product-Market Fit.
-                        </p>
-                    </div>
-                    <div class="border-t border-brand-border pt-6 grid grid-cols-1 gap-3 mt-4">
-                        <div class="flex items-center text-sm text-brand-muted">
-                            <i class="fas fa-check-circle text-brand-primary mr-3"></i> Strategy & Roadmap
-                        </div>
-                        <div class="flex items-center text-sm text-brand-muted">
-                            <i class="fas fa-check-circle text-brand-primary mr-3"></i> Unit Economics
-                        </div>
-                        <!-- Added Contact Link -->
-                        <a href="#contact" class="flex items-center text-sm text-brand-primary mt-2 hover:text-white transition-colors group/link font-medium">
-                            <span>Get in touch to engage</span> <i class="fas fa-arrow-right ml-2 group-hover/link:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Track 2: Residency (Internal) -->
-                <div class="glass-card rounded-2xl p-8 hover:bg-white/[0.04] transition-all group relative overflow-hidden flex flex-col h-full border-brand-accent/20">
-                    <div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-30 transition-opacity">
-                        <i class="fas fa-users-gear text-6xl text-brand-accent"></i>
-                    </div>
-                    <div class="mb-auto">
-                        <div class="h-10 px-3 bg-brand-accent/20 rounded-lg inline-flex items-center justify-center mb-6 text-brand-accent text-xs font-bold uppercase tracking-wider">
-                            For Talent
-                        </div>
-                        <h3 class="font-display text-2xl font-bold text-white mb-3">The Residency</h3>
-                        <p class="text-brand-muted mb-6 leading-relaxed">
-                            Our flagship program designed to solve the entry-level career cliff. We assemble teams to launch real products in a high-intensity simulation.
-                        </p>
-                    </div>
-                    <div class="border-t border-brand-border pt-6 grid grid-cols-1 gap-3 mt-4">
-                        <div class="flex items-center text-sm text-brand-muted">
-                            <i class="fas fa-check-circle text-brand-accent mr-3"></i> Real Venture Building
-                        </div>
-                        <div class="flex items-center text-sm text-brand-muted">
-                            <i class="fas fa-check-circle text-brand-accent mr-3"></i> Execution Portfolio
-                        </div>
-                        <!-- Link to Mission -->
-                        <a href="#mission" class="flex items-center text-sm text-brand-accent mt-2 hover:text-white transition-colors group/link font-medium">
-                            <span>See Mission & Framework below</span> <i class="fas fa-arrow-down ml-2 group-hover/link:translate-y-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem / Mission Section (Residency Only) -->
-    <section id="mission" class="py-24 bg-brand-surface/30">
-        <div class="max-w-6xl mx-auto px-6 reveal-on-scroll">
-            <div class="grid lg:grid-cols-2 gap-16 items-start">
-                <!-- Left: Typography -->
-                <div>
-                    <h2 class="text-sm font-mono text-brand-accent mb-4 uppercase tracking-wider">Residency Mission</h2>
-                    <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
-                        The Entry-Level Career Cliff
-                    </h3>
-                    <p class="text-brand-muted text-lg mb-8 leading-relaxed">
-                        We built the Residency to address a specific "Paradox of Potential" in the African tech ecosystem: brilliant youth remain unemployed because of a <span class="text-white font-medium">broken rung</span> in the career ladder.
-                    </p>
-                    
-                    <div class="space-y-8">
-                        <div class="pl-4 border-l-2 border-brand-border hover:border-brand-accent transition-colors">
-                            <h4 class="font-display text-white font-semibold mb-1">Automation of Basics</h4>
-                            <p class="text-brand-muted text-sm">AI is automating the entry-level tasks that used to serve as training grounds.</p>
-                        </div>
-                        <div class="pl-4 border-l-2 border-brand-border hover:border-brand-accent transition-colors">
-                            <h4 class="font-display text-white font-semibold mb-1">The Experience Paradox</h4>
-                            <p class="text-brand-muted text-sm">You can't get a job without experience, and you can't get experience without a job.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Visual Representation -->
-                <div class="relative">
-                    <!-- Abstract Graphic -->
-                    <div class="glass-card rounded-xl p-8 border border-brand-border bg-gradient-to-br from-brand-bg to-brand-surface">
-                        <div class="flex items-center justify-between mb-8">
-                            <div class="text-sm text-brand-muted font-medium">Residency Risk Profile</div>
-                            <div class="text-xs px-2 py-1 rounded bg-green-500/20 text-green-400 font-medium">Optimized</div>
-                        </div>
-                        
-                        <!-- Timeline Graphic -->
-                        <div class="relative h-48 border-l border-dashed border-brand-border ml-4 my-4">
-                            <!-- Node 1 -->
-                            <div class="absolute -left-1.5 top-0 h-3 w-3 rounded-full bg-brand-muted"></div>
-                            <div class="ml-6 top-0 absolute">
-                                <div class="text-white text-sm font-semibold">Residency Begins</div>
-                                <div class="text-brand-muted text-xs">Teams formed</div>
-                            </div>
-
-                            <!-- Node 2 -->
-                            <div class="absolute -left-1.5 top-1/2 h-3 w-3 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(242,201,76,0.5)]"></div>
-                            <div class="ml-6 top-1/2 -mt-3 absolute">
-                                <div class="text-white text-sm font-semibold">Product Launch</div>
-                                <div class="text-brand-muted text-xs">Validation</div>
-                            </div>
-
-                            <!-- Node 3 -->
-                            <div class="absolute -left-1.5 bottom-0 h-3 w-3 rounded-full bg-brand-primary"></div>
-                            <div class="ml-6 bottom-0 absolute">
-                                <div class="text-white text-sm font-semibold">Outcome</div>
-                                <div class="text-brand-muted text-xs">Employment or Funding</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Framework / Stats (Residency Only) -->
-    <section id="approach" class="py-24 border-t border-brand-border">
-        <div class="max-w-6xl mx-auto px-6 reveal-on-scroll">
-            <h2 class="font-display text-3xl font-bold tracking-tight text-white mb-12 text-center">Residency Framework</h2>
-            
-            <div class="grid md:grid-cols-3 gap-px bg-brand-border border border-brand-border rounded-xl overflow-hidden">
-                <div class="bg-brand-bg p-8 hover:bg-brand-surface transition-colors">
-                    <div class="text-brand-muted text-xs font-mono mb-4">01. CURRICULUM</div>
-                    <h3 class="font-display text-lg font-bold text-white mb-2">Three Pillars</h3>
-                    <p class="text-brand-muted text-sm">Rigorous structure focused on Discovery, Product-Market Fit, and Metrics.</p>
-                </div>
-                <div class="bg-brand-bg p-8 hover:bg-brand-surface transition-colors">
-                    <div class="text-brand-muted text-xs font-mono mb-4">02. MODEL</div>
-                    <h3 class="font-display text-lg font-bold text-white mb-2">Patient Capital</h3>
-                    <p class="text-brand-muted text-sm">Sustainability via mid-term placement fees and equity in post-residency companies.</p>
-                </div>
-                <div class="bg-brand-bg p-8 hover:bg-brand-surface transition-colors">
-                    <div class="text-brand-muted text-xs font-mono mb-4">03. STATUS</div>
-                    <h3 class="font-display text-lg font-bold text-white mb-2">Implementation</h3>
-                    <p class="text-brand-muted text-sm">Conceptual infrastructure complete. Pilot launching with 2-3 teams.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact" class="py-12 border-t border-brand-border bg-[#050607]">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-                <div class="mb-6 md:mb-0 text-center md:text-left">
-                    <h2 class="font-display text-2xl font-bold text-white tracking-tight mb-2">Build with VentureXYZ</h2>
-                    <p class="text-brand-muted">Turning potential into power.</p>
+                    <span class="font-display font-bold tracking-widest text-xl text-white uppercase">VentureXYZ</span>
                 </div>
                 
-                <!-- Action Buttons Container -->
-                <div class="flex flex-col sm:flex-row items-center gap-4">
-                    <!-- LinkedIn Button (Secondary) -->
-                    <a href="https://www.linkedin.com/company/vxyz/" target="_blank" class="group px-6 py-2.5 rounded-full border border-brand-border hover:border-brand-primary/50 hover:bg-brand-primary/10 transition-all duration-300 flex items-center gap-2">
-                        <i class="fab fa-linkedin text-brand-muted group-hover:text-brand-primary transition-colors text-lg"></i>
-                        <span class="text-sm font-medium text-brand-muted group-hover:text-white transition-colors">LinkedIn</span>
-                    </a>
+                <div class="hidden md:flex items-center gap-6 font-mono text-xs text-brand-accent tracking-widest uppercase">
+                    <span class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-brand-neon animate-pulse"></span>
+                        Live Telemetry
+                    </span>
+                    <span>v2.0.0-beta</span>
+                </div>
+            </header>
 
-                    <!-- Contact Button (Primary) -->
-                    <a href="mailto:build@venturexyz.io" class="px-6 py-2.5 bg-white text-black text-sm font-medium rounded-full hover:bg-gray-200 transition-colors font-display shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                        build@venturexyz.io
-                    </a>
+            <main class="flex-grow flex items-center p-6 md:p-12 w-full max-w-7xl mx-auto">
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-none border border-white/10 bg-black/40 backdrop-blur-md text-brand-cyan text-xs font-mono mb-6 tracking-[0.2em] uppercase opacity-0 animate-fade-in shadow-[0_0_15px_rgba(5,217,232,0.2)]" style="animation-delay: 0.5s;">
+                        <i class="fa-solid fa-rotate text-brand-cyan animate-spin" style="animation-duration: 3s;"></i>
+                        Thesis Evolution
+                    </div>
+
+                    <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white mb-5 leading-[1.05] opacity-0 animate-fade-in" style="animation-delay: 0.7s;">
+                        The Venture Studio <br />
+                        is <span id="morph-text" class="glitch-text text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-white to-brand-neon" data-text="Evolving">Evolving</span>
+                    </h1>
+
+                    <div class="text-lg md:text-2xl leading-[2.2] mb-8 font-medium opacity-0 animate-fade-in max-w-xl" style="animation-delay: 0.9s;">
+                        <span class="hl-line" style="--delay: 1.5s;">We are refining our venture model</span> 
+                        <span class="hl-line" style="--delay: 1.7s;">to isolate what truly scales.</span> 
+                        <span class="hl-line" style="--delay: 1.9s;">A highly concentrated iteration</span> 
+                        <span class="hl-line" style="--delay: 2.1s;">of our studio is taking shape.</span>
+                        <br><br>
+                        <span class="hl-line hl-neon" style="--delay: 2.5s;">Expect focused execution.</span>
+                    </div>
+
+                    <div class="flex items-center gap-4 mt-12 md:hidden opacity-0 animate-fade-in" style="animation-delay: 2.8s;">
+                        <span class="w-px h-12 bg-gradient-to-b from-brand-cyan to-transparent animate-pulse"></span>
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-white/30">Scroll to Explore</span>
+                    </div>
+                </div>
+            </main>
+        </section>
+
+        <!-- Footer -->
+        <footer class="w-full bg-brand-bg/95 border-t border-white/10 backdrop-blur-2xl z-20">
+            <div class="max-w-7xl mx-auto px-6 py-12 lg:py-16 flex flex-col gap-12">
+                <div class="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10">
+                    <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto items-center">
+                        <a href="mailto:build@venturexyz.io" class="btn-creative px-6 py-4 text-white font-medium rounded-none font-display tracking-wide text-sm flex items-center justify-center gap-3 group min-w-[200px]">
+                            <i class="fa-regular fa-envelope text-brand-cyan text-base"></i>
+                            build@venturexyz.io
+                            <i class="fa-solid fa-arrow-right text-brand-neon group-hover:translate-x-2 transition-transform opacity-0 group-hover:opacity-100 -ml-2 group-hover:ml-0"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/vxyz/" target="_blank" class="btn-creative px-6 py-4 text-gray-300 font-medium font-display tracking-wide text-sm flex items-center justify-center gap-3 hover:text-white transition-colors min-w-[160px]">
+                            <i class="fa-brands fa-linkedin text-brand-primary text-base"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+
+                    <div class="font-mono text-[10px] md:text-xs text-brand-cyan/60 flex flex-col gap-1 items-center lg:items-end text-center lg:text-right">
+                        <span>> venture_thesis_init()...</span>
+                        <span>> divesting_legacy_models... [DONE]</span>
+                        <span>> concentrating_capital... [ACTIVE]</span>
+                        <span class="animate-pulse">> awaiting_founders_</span>
+                    </div>
+                </div>
+
+                <div class="font-mono text-[10px] md:text-xs text-gray-600 uppercase tracking-widest border-t border-white/5 pt-8 flex flex-col lg:flex-row justify-between items-center opacity-50 text-center lg:text-left">
+                    <p>&copy; 2026 VentureXYZ</p>
+                    <p class="mt-2 lg:mt-0">Location: Earth // Status: Rebuilding</p>
                 </div>
             </div>
-            
-            <div class="pt-8 border-t border-brand-border text-center md:text-left text-xs text-brand-muted">
-                <p>&copy; 2026 VentureXYZ. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script>
-        // Mobile Menu
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+        document.addEventListener('DOMContentLoaded', () => {
+            const words = ["Evolving", "Refining", "Pivoting", "Focusing", "Scaling"];
+            let i = 0;
+            const morphText = document.getElementById('morph-text');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-
-        // --- Particle Network Animation (Innovation Engine) ---
-        const canvas = document.getElementById('innovation-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-
-        // Animation Config
-        const particleCount = 60; // How many dots
-        const connectionDistance = 150; // How far before they connect
-        const speed = 0.3; // Speed of movement
-
-        function resize() {
-            width = canvas.width = canvas.offsetWidth;
-            height = canvas.height = canvas.offsetHeight;
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * speed;
-                this.vy = (Math.random() - 0.5) * speed;
-                this.size = Math.random() * 2 + 1;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Bounce off edges
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(94, 106, 210, 0.4)'; // Brand primary color
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                // Draw connections
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < connectionDistance) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(94, 106, 210, ${0.15 * (1 - distance / connectionDistance)})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+            function typingEffect() {
+                if (!morphText) return;
+                let wordText = words[i];
+                let currentPos = 0;
+                var loopTyping = function() {
+                    if (currentPos < wordText.length) {
+                        morphText.innerHTML += wordText[currentPos];
+                        morphText.setAttribute('data-text', morphText.innerHTML); 
+                        currentPos++;
+                        setTimeout(loopTyping, 80);
+                    } else {
+                        setTimeout(deletingEffect, 2000);
                     }
-                }
+                };
+                loopTyping();
             }
-            requestAnimationFrame(animateParticles);
-        }
 
-        window.addEventListener('resize', () => {
-            resize();
-            initParticles();
+            function deletingEffect() {
+                var loopDeleting = function() {
+                    if (morphText.innerHTML.length > 0) {
+                        morphText.innerHTML = morphText.innerHTML.slice(0, -1);
+                        morphText.setAttribute('data-text', morphText.innerHTML);
+                        setTimeout(loopDeleting, 40);
+                    } else {
+                        i = (i + 1) % words.length;
+                        setTimeout(typingEffect, 400);
+                    }
+                };
+                loopDeleting();
+            }
+            if (morphText) {
+                morphText.innerHTML = '';
+                setTimeout(typingEffect, 2000);
+            }
         });
+    </script>
 
-        // Start Animation
-        resize();
-        initParticles();
-        animateParticles();
+    <script>
+        window.onload = function() {
+            const canvas = document.getElementById('webgl-canvas');
+            if (!canvas) return;
+            
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // --- Scroll Reveal Animation ---
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x030305, 0.0015);
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 250;
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Only animate once per session
+            const particleCount = 40000; 
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            const sizes = new Float32Array(particleCount);
+            
+            const radius = 100;
+            const cBlurple = new THREE.Color('#5E6AD2');
+            const cNeon = new THREE.Color('#FF2A6D');
+            const cCyan = new THREE.Color('#05D9E8');
+            const cAmber = new THREE.Color('#F2C94C');
+
+            for (let i = 0; i < particleCount; i++) {
+                const u = Math.random(), v = Math.random();
+                const theta = u * 2 * Math.PI, phi = Math.acos(2 * v - 1);
+                const r = radius + (Math.random() * 60 - 30);
+                positions[i*3] = r * Math.sin(phi) * Math.cos(theta);
+                positions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+                positions[i*3+2] = r * Math.cos(phi);
+
+                let col = cBlurple.clone();
+                const rand = Math.random();
+                if (rand < 0.4) col.lerp(cCyan, Math.random());
+                else if (rand < 0.7) col = cNeon.clone().lerp(cBlurple, Math.random());
+                else if (rand < 0.9) col = cCyan.clone();
+                else col = cAmber.clone();
+
+                colors[i*3] = col.r; colors[i*3+1] = col.g; colors[i*3+2] = col.b;
+                sizes[i] = Math.random() * 2.5;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+            const material = new THREE.PointsMaterial({ size: 1.5, vertexColors: true, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.8 });
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            const core = new THREE.Mesh(new THREE.IcosahedronGeometry(40, 2), new THREE.MeshBasicMaterial({ color: 0x05D9E8, wireframe: true, transparent: true, opacity: 0.1, blending: THREE.AdditiveBlending }));
+            scene.add(core);
+
+            const adjustScene = () => {
+                if (window.innerWidth > 768) { 
+                    scene.position.x = 40; scene.position.y = 0; camera.position.z = 250; 
+                } else { 
+                    scene.position.x = 0; scene.position.y = 0; camera.position.z = 300; 
                 }
-            });
-        }, observerOptions);
+            };
+            adjustScene();
 
-        document.querySelectorAll('.reveal-on-scroll').forEach((element) => {
-            observer.observe(element);
-        });
+            let mX = 0, mY = 0;
+            document.addEventListener('mousemove', (e) => { mX = e.clientX - window.innerWidth/2; mY = e.clientY - window.innerHeight/2; });
+
+            let clock = new THREE.Clock();
+            const originalPositions = new Float32Array(positions); 
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const time = clock.getElapsedTime() * 0.5;
+                particles.rotation.y += 0.002; core.rotation.y -= 0.005;
+                camera.position.x += (mX * 0.05 - camera.position.x) * 0.05;
+                camera.position.y += (-mY * 0.05 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                const posAttr = particles.geometry.attributes.position;
+                for (let i = 0; i < particleCount; i++) {
+                    const i3 = i * 3;
+                    const ox = originalPositions[i3], oy = originalPositions[i3+1], oz = originalPositions[i3+2];
+                    posAttr.array[i3] = ox + Math.sin(time * 2 + oy * 0.02) * 15;
+                    posAttr.array[i3+1] = oy + Math.cos(time * 1.5 + ox * 0.02) * 15;
+                    posAttr.array[i3+2] = oz + Math.sin(time * 1.8 + oz * 0.02) * 15;
+                }
+                posAttr.needsUpdate = true;
+                renderer.render(scene, camera);
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight); adjustScene();
+            });
+            animate();
+        };
     </script>
 </body>
 </html>
-
