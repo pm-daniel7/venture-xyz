@@ -138,11 +138,8 @@
         #morph-text {
             display: inline-block;
             min-width: 200px;
-            border-right: 4px solid #F2C94C;
             padding-right: 8px;
-            animation: blink 0.75s step-end infinite;
         }
-        @keyframes blink { from, to { border-color: transparent } 50% { border-color: #F2C94C; } }
         
         .hl-line {
             display: inline;
@@ -320,7 +317,7 @@
             const canvas = document.getElementById('webgl-canvas');
             if (!canvas) return;
             
-            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
