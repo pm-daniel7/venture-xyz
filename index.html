@@ -10,7 +10,15 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://venturexyz.io/">
 <meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://venturexyz.io/VXYZLogo.png">
+<meta property="og:image:width" content="530">
+<meta property="og:image:height" content="530">
+<meta name="twitter:image" content="https://venturexyz.io/VXYZLogo.png">
+<meta name="twitter:title" content="VentureXYZ — We Build What Comes Next">
+<meta name="twitter:description" content="Moonshot ambition. Product discipline. One system.">
 <link rel="canonical" href="https://venturexyz.io/">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <!-- GT America / Editorial Stack -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +65,7 @@ body {
   color: var(--t80);
   font-family: var(--sans);
   font-weight: 300;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.7;
   overflow-x: hidden;
   cursor: none;
@@ -701,14 +709,21 @@ body.hovering #cr { width: 56px; height: 56px; border-color: rgba(110,29,103,0.6
   display: flex; flex-direction: column; gap: 14px;
   align-items: flex-end;
 }
-.btn-cta-p {
-  font-family: var(--mono); font-size: 0.62rem;
+.cta-btns a {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 0.68rem;
   letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 18px 40px; border-radius: 2px;
+  white-space: nowrap;
+  transition: background .2s, box-shadow .2s, transform .15s, color .2s, border-color .2s;
+}
+.cta-btns a i {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.btn-cta-p {
   color: var(--t100); background: var(--p2);
   border: 1px solid var(--p3);
-  padding: 16px 40px; border-radius: 2px;
-  transition: background .2s, box-shadow .2s, transform .15s;
-  white-space: nowrap;
 }
 .btn-cta-p:hover {
   background: var(--p3);
@@ -716,14 +731,16 @@ body.hovering #cr { width: 56px; height: 56px; border-color: rgba(110,29,103,0.6
   transform: translateY(-2px);
 }
 .btn-cta-g {
-  font-family: var(--mono); font-size: 0.62rem;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--t35); white-space: nowrap;
-  transition: color .2s;
-  display: flex; align-items: center; gap: 6px;
+  color: var(--t80);
+  border: 1px solid rgba(255,255,255,0.18);
+  background: transparent;
 }
-.btn-cta-g:hover { color: var(--t80); }
-.btn-cta-g::after { content: '↗'; }
+.btn-cta-g:hover {
+  color: var(--t100);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255,255,255,0.05);
+}
 
 /* ──────────────────────────────────────────────
    FOOTER — x.company minimal
@@ -771,6 +788,14 @@ footer {
 /* ──────────────────────────────────────────────
    MOBILE
 ────────────────────────────────────────────── */
+/* ── Tablet ──────────────────────────── */
+@media (max-width: 980px) and (min-width: 601px) {
+  .px-item { grid-template-columns: 56px 1fr 1fr; }
+  .px-desc { display: block; }
+  .nums-grid { grid-template-columns: repeat(4,1fr); }
+  .num-cell:nth-child(3) { border-left: 1px solid var(--rule); padding-left: 24px; }
+}
+
 @media (max-width: 980px) {
   #nav { padding: 0 24px; }
   .nav-links { display: none; }
@@ -804,12 +829,39 @@ footer {
   .num-cell:nth-child(3) { border-left: none; padding-left: 0; }
   #cta { padding: 100px 24px; }
   .cta-bottom { grid-template-columns: 1fr; gap: 32px; }
-  .cta-btns { align-items: flex-start; }
+  .cta-btns { align-items: stretch; flex-direction: column; }
+  .cta-btns a { justify-content: center; }
   footer { padding: 32px 24px; grid-template-columns: 1fr; gap: 20px; text-align: center; }
   .foot-right, .foot-mid { text-align: center; }
   .foot-brand { justify-content: center; }
   #cd, #cr { display: none; }
-  body { cursor: auto; }
+  body { cursor: auto; font-size: 16px; }
+
+  /* Mobile font legibility */
+  .nav-logo-name { font-size: 1rem; }
+  .nav-contact { font-size: 0.72rem; letter-spacing: 0.08em; }
+  .hero-label { font-size: 0.68rem; letter-spacing: 0.2em; }
+  .hero-sub-text { font-size: 1.05rem; }
+  .btn-main { font-size: 0.72rem; padding: 14px 28px; }
+  .btn-text { font-size: 0.72rem; }
+  .mq-item { font-size: 0.68rem; letter-spacing: 0.16em; padding: 0 36px; }
+  .sec-label, .mf-label, .cta-label { font-size: 0.68rem; }
+  .id-col-left p, .model-top-right p, .mf-body p, .cta-text { font-size: 1rem; line-height: 1.8; }
+  .id-title, .px-title { font-size: 1rem; }
+  .id-desc, .id-n { font-size: 0.88rem; }
+  .m-col p { font-size: 0.95rem; }
+  .m-col-foot, .m-col-tag { font-size: 0.65rem; }
+  .m-col h3 { font-size: clamp(1.4rem, 5vw, 2rem); }
+  .model-quote-text { font-size: clamp(1.15rem, 4vw, 1.8rem); }
+  .model-quote-mark { font-size: 4rem; }
+  .px-item { padding: 28px 0; }
+  .px-num { font-size: 0.65rem; }
+  .num-val { font-size: 3rem; }
+  .num-val sup { font-size: 1.6rem; }
+  .num-label { font-size: 0.65rem; }
+  .btn-cta-p, .btn-cta-g { font-size: 0.72rem; padding: 16px 28px; }
+  .foot-mid, .foot-right { font-size: 0.62rem; }
+  .foot-brand-name { font-size: 0.88rem; }
 }
 </style>
 </head>
@@ -1063,8 +1115,8 @@ footer {
     <div class="cta-bottom sr">
       <p class="cta-text">We work with a deliberately small number of partners at any given time. If you are building something large enough, radical enough, and technically real enough — we want to hear about it.</p>
       <div class="cta-btns">
-        <a href="mailto:build@venturexyz.io" class="btn-cta-p">build@venturexyz.io</a>
-        <a href="https://linkedin.com/company/vxyz/" class="btn-cta-g">LinkedIn</a>
+        <a href="mailto:build@venturexyz.io" class="btn-cta-p"><i class="fa-regular fa-envelope"></i>build@venturexyz.io</a>
+        <a href="https://linkedin.com/company/vxyz/" target="_blank" rel="noopener" class="btn-cta-g"><i class="fa-brands fa-linkedin"></i>Follow on LinkedIn</a>
       </div>
     </div>
   </div>
@@ -1077,7 +1129,7 @@ footer {
     <span class="foot-brand-name">VentureXYZ</span>
   </div>
   <div class="foot-mid">
-    © 2026 VentureXYZ. All rights reserved.<br>
+    © 2025 VentureXYZ. All rights reserved.<br>
     Moonshot Ambition · Product Discipline
   </div>
   <div class="foot-right">
